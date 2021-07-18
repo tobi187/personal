@@ -10,13 +10,14 @@ class ToDoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
+      bgColor: Colors.black87,
       actionButton: FloatingActionButton(
           onPressed: () {
             Get.to(() => NewNote());
           },
           child: Icon(Icons.add)),
       headLine: "Todo's",
-      body: Column(
+      body: ListView(
         children: PrepData().prepData(),
       ),
     );

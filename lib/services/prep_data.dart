@@ -10,7 +10,11 @@ class PrepData {
   List<Widget> prepChilds() {
     List<Widget> output = [];
     for (String child in sampleChild) {
-      output.add(Text(child));
+      output.add(
+        Card(
+          child: Text(child),
+        ),
+      );
     }
     return output;
   }
@@ -21,9 +25,13 @@ class PrepData {
     for (String header in sampleData) {
       output.add(
         ExpansionTile(
+          collapsedBackgroundColor: Colors.white,
           title: Text(header),
           children: [
-            Column(children: prepChilds()),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: prepChilds(),
+            ),
           ],
         ),
       );

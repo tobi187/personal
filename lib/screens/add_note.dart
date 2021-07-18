@@ -23,6 +23,7 @@ class _NewNoteState extends State<NewNote> {
   int currCodeLanguage = 0;
   List languages = [plaintext, dart, python, javascript];
   CodeController? _codeController;
+  String? text;
   @override
   void initState() {
     // TODO: implement initState
@@ -43,7 +44,7 @@ class _NewNoteState extends State<NewNote> {
   @override
   Widget build(BuildContext context) {
     _codeController = CodeController(
-      text: widget.text,
+      text: text ?? widget.text,
       language: languages[currCodeLanguage],
       theme: monokaiSublimeTheme,
     );
@@ -58,6 +59,7 @@ class _NewNoteState extends State<NewNote> {
               onPageChanged: (int number, reason) {
                 setState(() {
                   currCodeLanguage = number;
+                  widget.text = _codeController!.value.text;
                 });
               },
             ),
