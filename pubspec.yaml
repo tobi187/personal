@@ -33,9 +33,11 @@ dependencies:
   get: ^4.1.4
   sqflite: ^2.0.0+3
   google_fonts: ^2.1.0
-  auto_size_text: ^2.1.0
+  expandable_text: ^2.2.0
   code_text_field: ^1.0.1-1
   carousel_slider: ^4.0.0
+  flutter_local_notifications: ^6.0.0
+
 
 dev_dependencies:
   flutter_test:

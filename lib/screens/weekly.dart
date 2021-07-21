@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:personal/widgets/main_scaffold.dart';
 
 class WeeklyToDos extends StatefulWidget {
@@ -35,37 +36,44 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
           child: Icon(Icons.add),
           onPressed: () {},
         ),
-        headLine: "Wecker",
+        headLine: "Weekly Tasks",
         body: ListView(
             children: weeklyStructure
-                .map((e) => GestureDetector(
+                .map((todo) => GestureDetector(
                       onHorizontalDragEnd: (details) {
-                        double detectionMin = 8;
+                        double detectionMin = 6.0;
                         if (details.primaryVelocity! > detectionMin) {
                           setState(() {
-                            e["amount"]++;
+                            todo["amount"]++;
                           });
                         }
                       },
-                      child: ListTile(
-                        leading: Text(
-                          e["amount"].toString(),
-                        ),
-                        //enabled: e["amount"] > 0 ? true : false,
-                        title: Text(
-                          e["title"],
-                          style: TextStyle(
-                              decoration: e["amount"] > 0
-                                  ? TextDecoration.none
-                                  : TextDecoration.lineThrough),
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.done),
-                          onPressed: () {
-                            setState(() {
-                              e["amount"]--;
-                            });
-                          },
+                      child: Card(
+                        elevation: 5.0,
+                        child: ListTile(
+                          leading: Text(
+                            todo["amount"].toString(),
+                            style: GoogleFonts.balooPaaji(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          //enabled: e["amount"] > 0 ? true : false,
+                          title: Text(
+                            todo["title"],
+                            style: GoogleFonts.lato(
+                                fontWeight: FontWeight.bold,
+                                decoration: todo["amount"] > 0
+                                    ? TextDecoration.none
+                                    : TextDecoration.lineThrough),
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.done),
+                            onPressed: () {
+                              setState(() {
+                                todo["amount"]--;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ))

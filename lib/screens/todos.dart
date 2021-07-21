@@ -10,7 +10,7 @@ class ToDoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      bgColor: Colors.black87,
+      bgColor: Colors.teal,
       actionButton: FloatingActionButton(
           onPressed: () {
             Get.to(() => NewNote());
@@ -18,7 +18,8 @@ class ToDoScreen extends StatelessWidget {
           child: Icon(Icons.add)),
       headLine: "Todo's",
       body: ListView(
-        children: PrepData().prepData(),
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+        children: PrepData().prepChilds(),
       ),
     );
   }

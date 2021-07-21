@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:personal/widgets/main_scaffold.dart';
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 
 class Clock extends StatelessWidget {
   const Clock({Key? key}) : super(key: key);
@@ -15,11 +14,13 @@ class Clock extends StatelessWidget {
           onPressed: () {},
         ),
         headLine: "Wecker",
-        body: ListView(
+        body: Column(
           children: [
-            ListTile(
-              title: Text("5.20"),
-            )
+            AnimatedContainer(
+              child: Text("7:30"),
+              duration: Duration(seconds: 1),
+            ),
+            Text("Sound:"),
           ],
         ),
       ),
