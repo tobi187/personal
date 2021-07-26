@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal/constants.dart';
 import 'package:personal/services/prep_data.dart';
 import 'package:personal/widgets/main_scaffold.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class ToDoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      bgColor: Colors.teal,
+      bgColor: kDarkBackground,
       actionButton: FloatingActionButton(
           onPressed: () {
             Get.to(() => NewNote());

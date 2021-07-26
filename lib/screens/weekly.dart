@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:personal/widgets/main_scaffold.dart';
+import 'package:personal/constants.dart';
 
 class WeeklyToDos extends StatefulWidget {
   WeeklyToDos({Key? key}) : super(key: key);
@@ -29,12 +31,21 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    var dataBox = Hive.openBox("weekly");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: MyScaffold(
+        bgColor: kDarkBackground,
         actionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            // ToDo: add weekly todo
+          },
         ),
         headLine: "Weekly Tasks",
         body: ListView(
@@ -49,11 +60,12 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
                         }
                       },
                       child: Card(
+                        color: kBrightBlue,
                         elevation: 5.0,
                         child: ListTile(
                           leading: Text(
                             todo["amount"].toString(),
-                            style: GoogleFonts.balooPaaji(
+                            style: GoogleFonts.merriweatherSans(
                               fontWeight: FontWeight.bold,
                             ),
                           ),

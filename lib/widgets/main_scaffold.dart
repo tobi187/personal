@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:personal/screens/todos.dart';
 import 'package:personal/screens/wecker.dart';
 import 'package:personal/screens/weekly.dart';
 
@@ -24,10 +27,27 @@ class MyScaffold extends StatelessWidget {
         floatingActionButton: actionButton,
         drawer: Drawer(
           child: ListView(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.zero, 
             children: [
-              DrawerHeader(
-                child: Text("Menu"),
+              SizedBox(height: 30),
+              // Drawer Header
+              ListTile(
+                title: Text(
+                  "      Menu",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+                enabled: false,
+              ),
+              Container(
+                  height: 1,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.black, width: 1)))),
+              ListTile(
+                title: Text("Tasks"),
+                onTap: () {
+                  Get.to(() => ToDoScreen());
+                },
               ),
               ListTile(
                 title: Text("Wecker"),
@@ -46,7 +66,17 @@ class MyScaffold extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
-          title: Text(headLine),
+          title: ListTile(
+            title: Text(headLine),
+            trailing: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Get.isDarkMode
+                    ? Get.changeTheme(ThemeData.light())
+                    : Get.changeTheme(ThemeData.dark());
+              },
+            ),
+          ),
         ),
         body: body,
       ),

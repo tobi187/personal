@@ -21,11 +21,10 @@ class NewNote extends StatefulWidget {
 class _NewNoteState extends State<NewNote> {
   CarouselController _carouselController = CarouselController();
   int currCodeLanguage = 0;
-  List languages = [plaintext, dart, python, javascript];
+  List languages = [plaintext, python, dart, javascript];
   CodeController? _codeController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _codeController = CodeController(
         text: widget.text,
@@ -35,7 +34,6 @@ class _NewNoteState extends State<NewNote> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _codeController?.dispose();
   }
@@ -121,7 +119,11 @@ class _NewNoteState extends State<NewNote> {
                 //       fontSize: 25.0,
                 //     )),
                 ),
-          )
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Add Note"),
+          ),
         ],
       ),
     );
