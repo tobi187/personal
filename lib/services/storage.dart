@@ -1,3 +1,14 @@
+import 'package:get_storage/get_storage.dart';
+
+// class DataWorker {
+//   void saveData(finishedDate,
+//       {required String boxName,
+//       required String headline,
+//       required String task,
+//       required DateTime creationDate,
+//       isDone = false}) {}
+// }
+
 class TaskDataModel {
   final String headline;
   final String task;

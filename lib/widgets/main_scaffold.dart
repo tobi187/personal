@@ -27,7 +27,7 @@ class MyScaffold extends StatelessWidget {
         floatingActionButton: actionButton,
         drawer: Drawer(
           child: ListView(
-            padding: EdgeInsets.zero, 
+            padding: EdgeInsets.zero,
             children: [
               SizedBox(height: 30),
               // Drawer Header

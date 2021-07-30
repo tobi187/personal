@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'screens/todos.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hive/hive.dart';
 
 void main() async {
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -13,7 +12,6 @@ void main() async {
   //     InitializationSettings(android: androidInitializationSettings);
   // await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   WidgetsFlutterBinding.ensureInitialized();
-  Hive.initFlutter();
   // await Hive.init(path);
   await GetStorage.init();
   runApp(const MyApp());

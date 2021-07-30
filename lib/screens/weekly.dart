@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
+import 'package:personal/widgets/bottom_sheet.dart';
 import 'package:personal/widgets/main_scaffold.dart';
 import 'package:personal/constants.dart';
 
@@ -12,29 +13,26 @@ class WeeklyToDos extends StatefulWidget {
 }
 
 class _WeeklyToDosState extends State<WeeklyToDos> {
-  final List weeklyStructure = [
+  final weeklyBox = GetStorage("WeeklyStorage");
+  List weeklyStructure = [
     {
       "id": 0,
-      "title": "sport",
-      "amount": 3,
-    },
-    {
-      "id": 1,
-      "title": "message",
-      "amount": 6,
-    },
-    {
-      "id": 2,
-      "title": "hustle",
-      "amount": 1,
-    },
+      "title": "Here could be your Todo",
+      "amount": 0,
+    }
   ];
 
   @override
   void initState() {
     super.initState();
-    var dataBox = Hive.openBox("weekly");
+    weeklyStructure = weeklyBox.getValues().toList();
+    print(weeklyStructure);
   }
+
+  // void test() {
+  //   weeklyBox.write("1", {"name": "Down", "key": "no", "id": 0});
+  //   weeklyBox.write("2", {"name": "deri", "key": "y", "id": 1});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +43,14 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
           child: Icon(Icons.add),
           onPressed: () {
             // ToDo: add weekly todo
+            weeklyBox.write("down", {"title": "down", "amount": 2});
+            showModalBottomSheet(
+                isScrollControlled: true,
+                context: context,
+                builder: (context) => MyBottomSheet());
+            setState(() {
+              weeklyStructure = weeklyBox.getValues().toList();
+            });
           },
         ),
         headLine: "Weekly Tasks",
@@ -56,6 +62,10 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
                         if (details.primaryVelocity! > detectionMin) {
                           setState(() {
                             todo["amount"]++;
+                            weeklyBox.write(todo["title"], {
+                              "title": todo["title"],
+                              "amount": todo["amount"]
+                            });
                           });
                         }
                       },
@@ -83,6 +93,10 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
                             onPressed: () {
                               setState(() {
                                 todo["amount"]--;
+                                weeklyBox.write(todo["title"], {
+                                  "title": todo["title"],
+                                  "amount": todo["amount"]
+                                });
                               });
                             },
                           ),

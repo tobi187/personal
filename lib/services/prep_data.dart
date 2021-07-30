@@ -7,14 +7,12 @@ import 'package:personal/constants.dart';
 import 'package:personal/screens/add_note.dart';
 
 class PrepData {
+  List data = ["hey", "du", "kuh"];
   // we need here the saved todos for everyday / alarms /
-
-  List sampleData = ["lu", "dow", "kalsd", "sucki"];
-  List sampleChild = ["my", "children", "samp"];
 
   List<Widget> prepChilds() {
     List<Widget> output = [];
-    for (String child in sampleChild) {
+    for (String child in data) {
       output.add(
         GestureDetector(
           onLongPress: () {
