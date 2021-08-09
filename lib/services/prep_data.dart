@@ -5,18 +5,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal/constants.dart';
 import 'package:personal/screens/add_note.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PrepData {
-  List data = ["hey", "du", "kuh"];
   // we need here the saved todos for everyday / alarms /
 
-  List<Widget> prepChilds() {
+  List<Widget> prepChilds(List data) {
     List<Widget> output = [];
-    for (String child in data) {
+    for (Map child in data) {
       output.add(
         GestureDetector(
           onLongPress: () {
-            Get.to(() => NewNote(text: child));
+            Get.to(() => NewNote());
           },
           child: Card(
             color: kColor2,
@@ -24,14 +24,21 @@ class PrepData {
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: ExpandableText(
-                child,
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                ),
+                child["title"] == ""
+                    ? child["title"] + "\n${child["text"]}"
+                    : child["text"],
+                style: child["title"] == ""
+                    ? GoogleFonts.lato(
+                        color: Colors.white,
+                      )
+                    : GoogleFonts.lato(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                 expandText: "",
                 expandOnTextTap: true,
                 collapseOnTextTap: true,
-                maxLines: 5,
+                maxLines: 3,
               ),
             ),
           ),

@@ -22,35 +22,33 @@ class _WeeklyToDosState extends State<WeeklyToDos> {
     }
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    weeklyStructure = weeklyBox.getValues().toList();
-    print(weeklyStructure);
-  }
-
   // void test() {
   //   weeklyBox.write("1", {"name": "Down", "key": "no", "id": 0});
   //   weeklyBox.write("2", {"name": "deri", "key": "y", "id": 1});
   // }
 
+  Future<void> getDataBase() async {
+    weeklyStructure = await weeklyBox.getValues().toList();
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
+    getDataBase();
+    return
+      Material(
       child: MyScaffold(
         bgColor: kDarkBackground,
         actionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
             // ToDo: add weekly todo
-            weeklyBox.write("down", {"title": "down", "amount": 2});
             showModalBottomSheet(
                 isScrollControlled: true,
                 context: context,
                 builder: (context) => MyBottomSheet());
-            setState(() {
-              weeklyStructure = weeklyBox.getValues().toList();
-            });
           },
         ),
         headLine: "Weekly Tasks",
