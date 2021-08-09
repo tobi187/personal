@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:personal/constants.dart';
 import 'package:personal/services/prep_data.dart';
@@ -15,6 +17,7 @@ class ToDoScreen extends StatefulWidget {
 
 class _ToDoScreenState extends State<ToDoScreen> {
   final todoBox = GetStorage("TodoStorage");
+  // late List usedId; // initstate get id's maybe
 
   List todoStructure = [
     {
@@ -24,6 +27,22 @@ class _ToDoScreenState extends State<ToDoScreen> {
       "finishdate": "",
     }
   ];
+
+  Future<String> genID() async {
+    while (true) {
+      List idsInUse = await todoBox.read("id");
+      String id = String.fromCharCodes(
+          List.generate(8, (index) => Random.secure().nextInt(33) + 89));
+
+      if (idsInUse.contains(id)) {
+        continue;
+      } else {
+        idsInUse.add(id);
+        todoBox.write("id", idsInUse);
+        return id;
+      }
+    }
+  }
 
   Future<void> getData() async {
     todoStructure = await todoBox.getValues().toList();
