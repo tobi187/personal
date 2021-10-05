@@ -1,11 +1,9 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal/constants.dart';
 import 'package:personal/screens/add_note.dart';
-import 'package:get_storage/get_storage.dart';
 
 class PrepData {
   // we need here the saved todos for everyday / alarms /
@@ -16,7 +14,7 @@ class PrepData {
       output.add(
         GestureDetector(
           onLongPress: () {
-            Get.to(() => NewNote());
+            Get.to(() => NewNote(id: child["id"]));
           },
           child: Card(
             color: kColor2,

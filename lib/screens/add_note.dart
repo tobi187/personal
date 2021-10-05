@@ -1,21 +1,13 @@
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:highlight/languages/python.dart';
-import 'package:highlight/languages/plaintext.dart';
-import 'package:highlight/languages/dart.dart';
-import 'package:highlight/languages/javascript.dart';
-import 'package:code_text_field/code_text_field.dart';
-import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:personal/screens/todos.dart';
 
 class NewNote extends StatefulWidget {
-  const NewNote({Key? key}) : super(key: key);
+  final String id;
+  const NewNote({Key? key, this.id = ""}) : super(key: key);
 
   @override
   State<NewNote> createState() => _NewNoteState();
@@ -24,6 +16,22 @@ class NewNote extends StatefulWidget {
 class _NewNoteState extends State<NewNote> {
   String text = "";
   String title = "";
+  String id = "";
+  TextEditingController textController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.id != "") {
+      Map todo = GetStorage("TodoStorage").read(widget.id);
+      id = todo["id"];
+      title = todo["title"];
+      text = todo["text"];
+    }
+    textController.text = text;
+    titleController.text = title;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +80,7 @@ class _NewNoteState extends State<NewNote> {
             minLines: 1,
             maxLines: 3,
             maxLength: 110,
+            controller: titleController,
             decoration: InputDecoration(
               hintText: "Titel hinzufügen",
             ),
@@ -79,9 +88,9 @@ class _NewNoteState extends State<NewNote> {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
-            onChanged: (value) {
-              title = value;
-            },
+            // onChanged: (value) {
+            //   title = titleController.text;
+            // },
           ),
           Expanded(
             child: Padding(
@@ -89,6 +98,7 @@ class _NewNoteState extends State<NewNote> {
               child: TextField(
                 maxLines: null,
                 autofocus: true,
+                controller: textController,
                 style: GoogleFonts.lato(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -97,7 +107,7 @@ class _NewNoteState extends State<NewNote> {
                   hintText: "ToDo hinzufügen",
                 ),
                 onChanged: (value) {
-                  text = value;
+                  text = textController.text;
                 },
               ),
             ),
